@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import marked from "marked"
-import ReactMarkdown from ReactMarkdown;
+import ReactMarkdown from 'react-markdown';
 
 
 export default function App() {
