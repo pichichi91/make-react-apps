@@ -35,3 +35,12 @@ blockquote {
   border-radius: 5px;
   margin: 0;
 }
+
+blockquote {
+  font-size: 20px;
+  background-color: #efefef;
+  border-left: 10px solid rgb(44, 163, 241);
+  padding: 20px 30px;
+  border-radius: 40px;
+  margin: 0;
+}
