@@ -1,59 +1,43 @@
-import React from 'react';
-import Rock from './icons/Rock';
-import Paper from './icons/Paper';
-import Scissors from './icons/Scissors';
+import React, { useEffect, useState } from 'react';
+
 import './App.css';
 
+import StatusDisplay from './components/StatusDisplay';
+import Choices from './components/Choices';
+import GameStats from "./components/GameStats";
+
+import choices from "./data/choices";
+
+// 
+
 export default function App() {
+
+  const [wins, setWins] = useState(0);
+  const [losses, setLosses] = useState(0);
+  const [userChoice, setUserChoice] = useState(null);
+  const [computerChoice, setComputerChoice] = useState(null);
+  const [gameState, setGameState] = useState(null);
+
+  useEffect(() => {
+    restartGame();
+
+  }, []);
+
+  function restartGame() {
+    const randomChoice = choices[Math.floor(Math.random() * choices.length)]
+    setComputerChoice(randomChoice);
+    setGameState(null);
+    setUserChoice(null);
+  }
+
+
+
   return (
     <div className="app">
-      {/* information goes here */}
-      <div className="info">
-        <h2>Rock. Paper. Scissors</h2>
-
-        {/* wins vs losses stats */}
-        <div className="wins-losses">
-          <div className="wins">
-            <span className="number">0</span>
-            <span className="text">Wins</span>
-          </div>
-
-          <div className="losses">
-            <span className="number">0</span>
-            <span className="text">Losses</span>
-          </div>
-        </div>
-      </div>
-
-      {/* the popup to show win/loss/draw */}
-      {/* <div className="game-state"></div> */}
-
-      <div className="choices">
-        {/* choices captions */}
-        <div>You</div>
-        <div />
-        <div>Computer</div>
-
-        {/* buttons for my choice */}
-        <div>
-          <button className="rock">
-            <Rock />
-          </button>
-          <button className="paper">
-            <Paper />
-          </button>
-          <button className="scissors">
-            <Scissors />
-          </button>
-        </div>
-
-        <div className="vs">vs</div>
-
-        {/* show the computer's choice */}
-        <div>
-          <button className="computer-choice">?</button>
-        </div>
-      </div>
-    </div>
+      {/* wins vs losses stats */}
+      <StatusDisplay wins={wins} losses={losses} />
+      <GameStats userChoice={userChoice} gameState={gameState} restartGame={restartGame} />
+      <Choices computerChoice={computerChoice} setGameState={setGameState} setWins={setWins} setLosses={setLosses} setUserChoice={setUserChoice} />
+    </div >
   );
 }

@@ -59,11 +59,11 @@ export default function App() {
       </div>
 
       <div className="buttons">
-        {isRunning ? (
+        {isRunning ?
           <button onClick={stopTimer}>Stop</button>
-        ) : (
-            <button onClick={startTimer}>Start</button>
-          )}
+          :
+          <button onClick={startTimer}>Start</button>
+        }
         {timeLeft < MAX_TIME && <button onClick={resetTimer}>Reset</button>}
       </div>
     </div>
