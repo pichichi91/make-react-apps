@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function AddressBar() {
+const addHTTPs = (url) => {
+
+  return url.startsWith("http") ? url : `https://${url}`
+}
+
+
+const AddressBar = ({ update, url }) => {
+
+  const [value, setValue] = useState(url || '')
+
+  useEffect(() => {
+    setValue(url)
+  }, [url])
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    update(addHTTPs(value));
+
+  }
+
+
+
+
   return (
     <div className="address-bar">
-      <form>
-        <input type="text" name="url" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="url"
+          value={value}
+          onChange={(event) => setValue(event.target.value)} />
       </form>
     </div>
   );
 }
+
+export default AddressBar;

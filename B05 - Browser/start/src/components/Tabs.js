@@ -1,31 +1,36 @@
 import React, { useState } from 'react';
 
-export default function Tabs() {
+const Tabs = ({ browsers, choose, add, active, close }) => {
   return (
     <div className="tabs">
+      {browsers.map((browser, index,) => (
+        <Tab close={close} isActive={active === index} index={index} key={index}>
+          <button onClick={() => choose(index)}>{browser}</button>
+        </Tab>
+      ))}
+
       <Tab>
-        <button>Click Me</button>
-      </Tab>
-      <Tab>
-        <button>+</button>
+        <button onClick={add}>+</button>
       </Tab>
     </div>
   );
 }
 
-function Tab({ index, children, close, isActive }) {
+export default Tabs;
+
+const Tab = ({ index, children, close, isActive }) => {
   const [highlightStyle, setHighlightStyle] = useState({
     left: 0,
   });
 
-  function moveHighlight(e) {
+  const moveHighlight = (e) => {
     setHighlightStyle({
       opacity: 0.4,
       left: e.nativeEvent.layerX - 250,
     });
   }
 
-  function hideHighlight(e) {
+  const hideHighlight = (e) => {
     setHighlightStyle({ opacity: 0, left: e.nativeEvent.layerX - 250 });
   }
 
